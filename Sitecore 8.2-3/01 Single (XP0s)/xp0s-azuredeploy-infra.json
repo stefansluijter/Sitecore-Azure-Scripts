@@ -231,71 +231,7 @@
         "provider": "[parameters('sitecoreTags').provider]"
       },
       "resources": [
-        {
-          "apiVersion": "[variables('webApiVersion')]",
-          "name": "slotconfignames",
-          "type": "config",
-          "dependsOn": [
-            "[resourceId('Microsoft.Web/sites', variables('webAppNameTidy'))]"
-          ],
-          "properties": {
-            "appSettingNames": [
-              "WEBSITE_LOCAL_CACHE_OPTION",
-              "WEBSITE_LOCAL_CACHE_SIZEINMB"
-            ]
-          }
-        },
-        {
-          "apiVersion": "[variables('webApiVersion')]",
-          "type": "config",
-          "name": "appsettings",
-          "dependsOn": [
-            "[resourceId('Microsoft.Web/sites', variables('webAppNameTidy'))]"
-          ],
-          "properties": {
-            "WEBSITE_LOCAL_CACHE_OPTION": "Never",
-            "WEBSITE_LOCAL_CACHE_SIZEINMB": "1024"
-          }
-        },
-        {
-          "name": "single-staging",
-          "type": "slots",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2015-08-01",
-          "dependsOn": [
-            "[resourceId('Microsoft.Web/sites', variables('webAppNameTidy'))]"
-          ],
-          "properties": {},
-          "resources": [
-            {
-              "type": "config",
-              "apiVersion": "2015-08-01",
-              "name": "web",
-              "dependsOn": [
-                "[resourceId('Microsoft.Web/sites/slots', variables('webAppNameTidy'), 'single-staging')]"
-              ],
-              "properties": {
-                "siteConfig": {
-                  "use32BitWorkerProcess": false,
-                  "alwaysOn": true,
-                  "phpVersion": "",
-                  "defaultDocuments": [
-                    "index.html"
-                  ]
-                }
-              }
-            },
-            {
-              "apiVersion": "[variables('webApiVersion')]",
-              "type": "config",
-              "name": "appsettings",
-              "dependsOn": [
-                "[resourceId('Microsoft.Web/sites/slots', variables('webAppNameTidy'), 'single-staging')]"
-              ],
-              "properties": {}
-            }
-          ]
-        }
+        
       ]      
     },
     {
